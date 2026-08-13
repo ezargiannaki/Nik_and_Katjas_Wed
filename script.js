@@ -1,10 +1,8 @@
 const shell = document.getElementById("shell");
 
-shell.addEventListener("click", function(event) {
+shell.addEventListener("click", (e) => {
 
-  // Αν πατήσει το κουμπί των φωτογραφιών,
-  // δεν ξανακλείνουμε το κοχύλι
-  if (event.target.closest(".photo-button")) {
+  if (e.target.closest(".upload-btn")) {
     return;
   }
 
