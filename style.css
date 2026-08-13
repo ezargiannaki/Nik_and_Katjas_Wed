@@ -2,28 +2,20 @@
   box-sizing: border-box;
 }
 
-
 html,
 body {
   margin: 0;
-
   width: 100%;
   min-height: 100%;
 }
 
-
 body {
-
   min-height: 100vh;
-
   overflow: hidden;
 
-  font-family:
-    'Manrope',
-    sans-serif;
+  font-family: 'Manrope', sans-serif;
 
   background:
-
     radial-gradient(
       circle at 50% 45%,
       #fffdf8 0%,
@@ -33,89 +25,69 @@ body {
 }
 
 
-/* =====================================
+/* ==================================================
    PAGE
-===================================== */
+================================================== */
 
 .page {
-
   position: relative;
 
   width: 100vw;
   height: 100vh;
 
   display: flex;
-
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
   overflow: hidden;
 }
 
 
-/* =====================================
+/* ==================================================
    INSTRUCTION
-===================================== */
+================================================== */
 
 .instruction {
-
   position: absolute;
 
-  top: 6vh;
-
+  top: 4vh;
   left: 50%;
 
-  transform:
-    translateX(-50%);
+  transform: translateX(-50%);
 
   z-index: 100;
 
-  font-family:
-    'Cormorant Garamond',
-    serif;
+  font-family: 'Cormorant Garamond', serif;
 
-  font-size:
-    clamp(18px, 2vw, 26px);
+  font-size: clamp(18px, 1.8vw, 25px);
 
   letter-spacing: 3px;
 
-  color:
-    #91775f;
+  color: #94745d;
 
   transition:
-    opacity .6s ease,
-    transform .6s ease;
+    opacity .5s ease,
+    transform .5s ease;
 }
 
-
 body.opened .instruction {
-
   opacity: 0;
 
   transform:
     translateX(-50%)
-    translateY(-15px);
+    translateY(-12px);
 }
 
 
-/* =====================================
-   ΟΛΟ ΤΟ ΚΟΧΥΛΙ
-===================================== */
+/* ==================================================
+   SHELL SCENE
+================================================== */
 
 .shell {
-
   position: relative;
 
-  width:
-    min(94vw, 1100px);
-
-  height:
-    min(85vh, 820px);
-
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
+  width: min(96vw, 1250px);
+  height: min(93vh, 900px);
 
   cursor: pointer;
 
@@ -123,126 +95,322 @@ body.opened .instruction {
 }
 
 
-/* =====================================
-   ΚΛΕΙΣΤΟ ΚΟΧΥΛΙ
-===================================== */
+/* ==================================================
+   CLOSED SHELL
+================================================== */
 
 .shell-closed {
-
   position: absolute;
 
   left: 50%;
-  top: 50%;
+  top: 54%;
+
+  width: min(92vw, 1100px);
 
   transform:
     translate(-50%, -50%)
     scale(1);
 
-  width: 92%;
-
-  max-height: 80vh;
-
   object-fit: contain;
 
   z-index: 20;
 
-  transition:
-
-    opacity .45s ease,
-
-    transform .65s
-    cubic-bezier(.2,.8,.2,1);
-
   filter:
-
     drop-shadow(
-      0 30px 35px
-      rgba(91,62,40,.18)
+      0 28px 30px
+      rgba(100, 65, 40, .18)
     );
+
+  transition:
+    opacity .5s ease,
+    transform .8s cubic-bezier(.2,.8,.2,1);
 }
 
 
-/* μικρή κίνηση πριν πατηθεί */
-
-.shell:not(.open):hover
-.shell-closed {
-
+.shell:not(.open) .shell-closed:hover {
   transform:
     translate(-50%, -50%)
     scale(1.025);
 }
 
 
-/* όταν ανοίξει */
-
-.shell.open
-.shell-closed {
-
+.shell.open .shell-closed {
   opacity: 0;
 
   transform:
     translate(-50%, -50%)
-    scale(.94);
+    scale(.92);
 
   pointer-events: none;
 }
 
 
-/* =====================================
+/* ==================================================
    OPEN SHELL CONTAINER
-===================================== */
+================================================== */
 
 .open-shell {
-
   position: absolute;
 
-  width: 100%;
-  height: 100%;
-
-  left: 0;
-  top: 0;
+  inset: 0;
 
   opacity: 0;
 
   pointer-events: none;
 
   transition:
-    opacity .15s ease .32s;
+    opacity .25s ease .25s;
 }
 
 
-.shell.open
-.open-shell {
-
+.shell.open .open-shell {
   opacity: 1;
-
   pointer-events: auto;
 }
 
 
-/* =====================================
-   ΚΑΤΩ ΜΕΡΟΣ
-===================================== */
+/* ==================================================
+   TOP SHELL WRAPPER
+================================================== */
 
-.shell-bottom-wrapper {
-
+.shell-top-wrapper {
   position: absolute;
-
-  width: 88%;
 
   left: 50%;
 
-  bottom: 3%;
+  /*
+    Αυτό είναι το σημείο που "κουμπώνει"
+    το πάνω με το κάτω μέρος.
+  */
+
+  bottom: 34%;
+
+  width: min(89vw, 1080px);
 
   transform:
     translateX(-50%);
 
-  z-index: 5;
+  transform-origin:
+    50% 100%;
+
+  z-index: 4;
+}
+
+
+/* ==================================================
+   TOP SHELL IMAGE
+================================================== */
+
+.shell-top {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  transform-origin:
+    50% 100%;
+
+  /*
+    Ξεκινάει "κλειστό"
+  */
+
+  transform:
+    translateY(220px)
+    scaleY(.13);
+
+  opacity: 0;
+
+  filter:
+    drop-shadow(
+      0 20px 28px
+      rgba(80, 50, 30, .14)
+    );
+
+  transition:
+    transform 1.45s
+      cubic-bezier(.18,.88,.25,1),
+    opacity .25s ease;
+}
+
+
+.shell.open .shell-top {
+  opacity: 1;
+
+  transform:
+    translateY(0)
+    scaleY(1);
+}
+
+
+/* ==================================================
+   TEXT ON TOP SHELL
+================================================== */
+
+.shell-content {
+  position: absolute;
+
+  /*
+    Εδώ τοποθετούμε τα γράμματα
+    πραγματικά ΜΕΣΑ στο πάνω κοχύλι.
+  */
+
+  left: 50%;
+  top: 29%;
+
+  width: 57%;
+
+  transform:
+    translateX(-50%)
+    translateY(22px);
+
+  text-align: center;
+
+  z-index: 10;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition:
+    opacity .9s ease 1.05s,
+    transform .9s ease 1.05s;
+}
+
+
+.shell.open .shell-content {
+  opacity: 1;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+
+/* ==================================================
+   SMALL TOP ORNAMENT
+================================================== */
+
+.ornament {
+  margin-bottom: 7px;
+
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size: 19px;
+
+  color: #ad815c;
+
+  opacity: .85;
+}
+
+
+/* ==================================================
+   NAMES
+================================================== */
+
+.names {
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size:
+    clamp(43px, 5.2vw, 72px);
+
+  line-height: .82;
+
+  font-weight: 500;
+
+  color: #8d684b;
+
+  /*
+    Εφέ "χαραγμένο"
+  */
+
+  text-shadow:
+    1px 1px 1px
+    rgba(255,255,255,.95),
+
+    -1px -1px 1px
+    rgba(99,65,38,.17);
+}
+
+
+.names span {
+  display: block;
+
+  margin: 9px 0 7px;
+
+  font-size: .52em;
+
+  font-style: italic;
+
+  color: #9f7958;
+}
+
+
+/* ==================================================
+   HEART
+================================================== */
+
+.divider {
+  margin-top: 17px;
+
+  font-size: 22px;
+
+  color: #a97752;
+}
+
+
+/* ==================================================
+   DATE
+================================================== */
+
+.date {
+  margin-top: 4px;
+
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size:
+    clamp(20px, 2vw, 28px);
+
+  letter-spacing: 7px;
+
+  color: #917056;
+
+  text-shadow:
+    1px 1px 0
+    rgba(255,255,255,.8);
+}
+
+
+/* ==================================================
+   BOTTOM SHELL
+================================================== */
+
+.shell-bottom-wrapper {
+  position: absolute;
+
+  /*
+    Το κατεβάζουμε αρκετά ώστε
+    να μην καλύπτει το πίσω φύλλο.
+  */
+
+  left: 50%;
+  bottom: -2%;
+
+  width: min(91vw, 1100px);
+
+  transform:
+    translateX(-50%);
+
+  z-index: 6;
 }
 
 
 .shell-bottom {
-
   display: block;
 
   width: 100%;
@@ -251,282 +419,98 @@ body.opened .instruction {
   object-fit: contain;
 
   filter:
-
     drop-shadow(
-      0 28px 32px
-      rgba(91,62,40,.18)
+      0 30px 35px
+      rgba(91,62,40,.16)
     );
 }
 
 
-/* =====================================
-   ΠΑΝΩ ΜΕΡΟΣ
-===================================== */
-
-.shell-top {
-
-  position: absolute;
-
-  width: 88%;
-
-  left: 50%;
-
-  bottom: 34%;
-
-  transform-origin:
-    50% 100%;
-
-  transform:
-
-    translateX(-50%)
-
-    translateY(160px)
-
-    scaleY(.25);
-
-  opacity: 0;
-
-  z-index: 4;
-
-  filter:
-
-    drop-shadow(
-      0 18px 25px
-      rgba(80,50,30,.15)
-    );
-
-  transition:
-
-    transform 1.45s
-    cubic-bezier(.16,.85,.25,1),
-
-    opacity .3s ease;
-}
-
-
-/* ΑΝΟΙΓΜΑ */
-
-.shell.open
-.shell-top {
-
-  opacity: 1;
-
-  transform:
-
-    translateX(-50%)
-
-    translateY(0)
-
-    scaleY(1);
-}
-
-
-/* =====================================
-   ΚΕΙΜΕΝΟ
-===================================== */
-
-.shell-content {
-
-  position: absolute;
-
-  left: 50%;
-
-  top: 15%;
-
-  transform:
-
-    translateX(-50%)
-
-    translateY(30px);
-
-  width: 64%;
-
-  text-align: center;
-
-  z-index: 10;
-
-  opacity: 0;
-
-  transition:
-
-    opacity 1s ease 1.1s,
-
-    transform 1s ease 1.1s;
-}
-
-
-.shell.open
-.shell-content {
-
-  opacity: 1;
-
-  transform:
-
-    translateX(-50%)
-
-    translateY(0);
-}
-
-
-/* =====================================
-   ΟΝΟΜΑΤΑ
-===================================== */
-
-.names {
-
-  font-family:
-    'Cormorant Garamond',
-    serif;
-
-  font-size:
-    clamp(45px, 6vw, 78px);
-
-  line-height: .83;
-
-  font-weight: 500;
-
-  color:
-    #8a6749;
-
-  text-shadow:
-
-    1px 1px 1px
-    rgba(255,255,255,.9),
-
-    -1px -1px 1px
-    rgba(90,60,35,.18);
-}
-
-
-.names span {
-
-  display: block;
-
-  margin: 8px 0;
-
-  font-size: .55em;
-
-  font-style: italic;
-
-  color:
-    #a17a58;
-}
-
-
-/* =====================================
-   HEART
-===================================== */
-
-.divider {
-
-  margin-top: 18px;
-
-  color:
-    #ad815b;
-
-  font-size: 25px;
-}
-
-
-/* =====================================
-   DATE
-===================================== */
-
-.date {
-
-  margin-top: 5px;
-
-  font-family:
-    'Cormorant Garamond',
-    serif;
-
-  font-size:
-    clamp(20px, 2.3vw, 30px);
-
-  letter-spacing: 7px;
-
-  color:
-    #987357;
-}
-
-
-/* =====================================
-   BUTTON
-===================================== */
+/* ==================================================
+   UPLOAD BUTTON
+================================================== */
 
 .upload-button {
+  position: absolute;
+
+  left: 50%;
+  top: 51%;
+
+  transform:
+    translateX(-50%)
+    translateY(15px);
 
   display: inline-flex;
 
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
   gap: 9px;
 
-  margin-top: 22px;
+  min-width: 285px;
 
   padding:
     13px 25px;
 
-  border-radius:
-    999px;
+  border-radius: 999px;
 
   border:
     1px solid
-    rgba(151,108,71,.5);
+    rgba(151,108,71,.48);
 
   background:
-    rgba(255,250,243,.62);
+    rgba(255,250,243,.66);
 
   backdrop-filter:
     blur(8px);
 
   text-decoration: none;
 
-  color:
-    #806149;
+  color: #806149;
 
-  font-size:
-    12px;
+  font-size: 12px;
 
-  letter-spacing:
-    .6px;
+  letter-spacing: .5px;
+
+  opacity: 0;
 
   box-shadow:
-
     inset 0 1px 0
     rgba(255,255,255,.9),
 
     0 8px 22px
-    rgba(87,55,30,.09);
+    rgba(87,55,30,.08);
 
   transition:
-    transform .25s ease,
+    opacity .8s ease 1.35s,
+    transform .8s ease 1.35s,
     background .25s ease;
 }
 
 
-.upload-button:hover {
+.shell.open .upload-button {
+  opacity: 1;
 
   transform:
-    translateY(-2px);
-
-  background:
-    rgba(255,255,255,.85);
+    translateX(-50%)
+    translateY(0);
 }
 
 
-/* =====================================
+.upload-button:hover {
+  background:
+    rgba(255,255,255,.9);
+}
+
+
+/* ==================================================
    MOBILE
-===================================== */
+================================================== */
 
-@media
-(max-width: 700px) {
-
+@media (max-width: 700px) {
 
   .instruction {
-
-    top: 4vh;
+    top: 3vh;
 
     font-size: 17px;
 
@@ -535,80 +519,159 @@ body.opened .instruction {
 
 
   .shell {
-
     width: 100vw;
-
-    height: 90vh;
+    height: 93vh;
   }
 
+
+  /* κλειστό */
 
   .shell-closed {
+    width: 118vw;
 
-    width: 115%;
+    top: 53%;
   }
 
 
-  .shell-bottom-wrapper {
+  /* ΠΑΝΩ ΦΥΛΛΟ */
 
-    width: 108%;
+  .shell-top-wrapper {
+    width: 112vw;
 
-    bottom: 8%;
+    bottom: 39%;
   }
 
 
   .shell-top {
-
-    width: 108%;
-
-    bottom: 36%;
+    transform:
+      translateY(160px)
+      scaleY(.16);
   }
 
 
+  .shell.open .shell-top {
+    transform:
+      translateY(0)
+      scaleY(1);
+  }
+
+
+  /* ΚΕΙΜΕΝΟ */
+
   .shell-content {
+    top: 27%;
 
-    width: 60%;
-
-    top: 12%;
+    width: 55%;
   }
 
 
   .names {
-
     font-size:
       clamp(
-        38px,
-        11vw,
-        55px
+        35px,
+        10.5vw,
+        50px
       );
   }
 
 
+  .names span {
+    margin:
+      5px 0;
+  }
+
+
+  .ornament {
+    font-size: 15px;
+
+    margin-bottom: 4px;
+  }
+
+
   .divider {
+    margin-top: 10px;
 
-    margin-top: 11px;
-
-    font-size: 20px;
+    font-size: 18px;
   }
 
 
   .date {
-
-    font-size: 18px;
+    font-size: 16px;
 
     letter-spacing: 4px;
   }
 
 
-  .upload-button {
+  /* ΚΑΤΩ ΦΥΛΛΟ */
 
-    width: 100%;
+  .shell-bottom-wrapper {
+    width: 116vw;
+
+    bottom: 3%;
+  }
+
+
+  /* BUTTON */
+
+  .upload-button {
+    top: 49%;
+
+    min-width: 0;
+
+    width: 50%;
 
     padding:
       11px 10px;
 
-    margin-top: 14px;
+    font-size: 9px;
+  }
 
-    font-size: 10px;
+}
+
+
+/* ==================================================
+   VERY SMALL MOBILE
+================================================== */
+
+@media (max-width: 430px) {
+
+  .shell-top-wrapper {
+    width: 120vw;
+
+    bottom: 40%;
+  }
+
+
+  .shell-bottom-wrapper {
+    width: 124vw;
+
+    bottom: 4%;
+  }
+
+
+  .shell-content {
+    top: 27%;
+
+    width: 54%;
+  }
+
+
+  .names {
+    font-size: 38px;
+  }
+
+
+  .date {
+    font-size: 14px;
+
+    letter-spacing: 3px;
+  }
+
+
+  .upload-button {
+    width: 52%;
+
+    font-size: 8px;
   }
 
 }
