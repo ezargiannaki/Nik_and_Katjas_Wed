@@ -1,0 +1,497 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+
+  background:
+    radial-gradient(
+      circle at center,
+      #fffdf7 0%,
+      #f8f2e8 45%,
+      #eee3d4 100%
+    );
+
+  overflow: hidden;
+}
+
+
+/* ========================
+   PAGE
+======================== */
+
+.page {
+  position: relative;
+
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  perspective: 1300px;
+}
+
+
+/* ========================
+   INTRO
+======================== */
+
+.intro-text {
+  position: absolute;
+
+  top: 9%;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 20px;
+  letter-spacing: 2px;
+
+  color: #8f806e;
+
+  transition: 0.6s ease;
+}
+
+.shell-wrapper.open + .intro-text {
+  opacity: 0;
+}
+
+
+/* ========================
+   SHELL WRAPPER
+======================== */
+
+.shell-wrapper {
+  position: relative;
+
+  width: 430px;
+  height: 430px;
+
+  cursor: pointer;
+
+  transform-style: preserve-3d;
+
+  transition: transform 0.5s ease;
+}
+
+.shell-wrapper:hover {
+  transform: scale(1.02);
+}
+
+
+/* ========================
+   BOTTOM SHELL
+======================== */
+
+.shell-bottom {
+  position: absolute;
+
+  width: 400px;
+  height: 255px;
+
+  left: 15px;
+  bottom: 40px;
+
+  border-radius:
+    48% 48%
+    55% 55%
+    / 35% 35%
+    65% 65%;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 15%,
+      #fffefa 0%,
+      #f8ead9 28%,
+      #e5cdb2 55%,
+      #b99878 100%
+    );
+
+  box-shadow:
+    inset 0 15px 25px rgba(255,255,255,0.9),
+    inset 0 -15px 30px rgba(120,80,50,0.25),
+    0 35px 45px rgba(80,55,35,0.18);
+
+  overflow: hidden;
+}
+
+
+/* mother of pearl shine */
+
+.shell-bottom::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 12px;
+
+  border-radius: inherit;
+
+  background:
+    radial-gradient(
+      circle at 30% 40%,
+      rgba(255,255,255,0.9),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 70% 35%,
+      rgba(255,220,220,0.35),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 55% 75%,
+      rgba(210,230,255,0.3),
+      transparent 40%
+    );
+
+  pointer-events: none;
+}
+
+
+/* ========================
+   TOP SHELL
+======================== */
+
+.shell-top {
+  position: absolute;
+
+  width: 400px;
+  height: 260px;
+
+  left: 15px;
+  top: 70px;
+
+  border-radius:
+    52% 52%
+    45% 45%
+    / 68% 68%
+    34% 34%;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 80%,
+      #fbf1e3 0%,
+      #ead5be 35%,
+      #c5a181 70%,
+      #9f7d61 100%
+    );
+
+  transform-origin: center bottom;
+
+  z-index: 5;
+
+  box-shadow:
+    inset 0 15px 30px rgba(255,255,255,0.65),
+    inset 0 -20px 30px rgba(95,60,35,0.25),
+    0 15px 35px rgba(70,40,20,0.22);
+
+  transition:
+    transform 1.8s cubic-bezier(.2,.85,.2,1),
+    filter 1s ease;
+}
+
+
+/* μικρό περίγραμμα */
+
+.shell-top::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 7px;
+
+  border-radius: inherit;
+
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+
+/* ========================
+   SHELL LINES
+======================== */
+
+.shell-lines {
+  position: absolute;
+
+  inset: 0;
+
+  overflow: hidden;
+
+  border-radius: inherit;
+}
+
+.shell-lines span {
+  position: absolute;
+
+  bottom: -20px;
+  left: 50%;
+
+  width: 2px;
+  height: 260px;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(110,75,48,0.35),
+      rgba(255,255,255,0.05)
+    );
+
+  transform-origin: bottom center;
+}
+
+.shell-lines span:nth-child(1) {
+  transform: translateX(-50%) rotate(-34deg);
+}
+
+.shell-lines span:nth-child(2) {
+  transform: translateX(-50%) rotate(-17deg);
+}
+
+.shell-lines span:nth-child(3) {
+  transform: translateX(-50%);
+}
+
+.shell-lines span:nth-child(4) {
+  transform: translateX(-50%) rotate(17deg);
+}
+
+.shell-lines span:nth-child(5) {
+  transform: translateX(-50%) rotate(34deg);
+}
+
+
+/* ========================
+   OPEN ANIMATION
+======================== */
+
+.shell-wrapper.open .shell-top {
+
+  transform:
+    translateY(-25px)
+    rotateX(-115deg);
+
+  filter: brightness(1.08);
+}
+
+
+/* ========================
+   PEARL
+======================== */
+
+.pearl {
+  position: absolute;
+
+  width: 62px;
+  height: 62px;
+
+  border-radius: 50%;
+
+  left: 50%;
+  top: 52px;
+
+  transform:
+    translateX(-50%)
+    scale(0);
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #ffffff 0%,
+      #fffdf4 25%,
+      #eadfd5 65%,
+      #cab9ae 100%
+    );
+
+  box-shadow:
+    0 0 25px rgba(255,255,255,0.9),
+    0 0 55px rgba(255,220,170,0.45);
+
+  transition:
+    transform 1s ease 0.8s;
+}
+
+.shell-wrapper.open .pearl {
+  transform:
+    translateX(-50%)
+    scale(1);
+}
+
+
+/* ========================
+   ENGRAVED TEXT
+======================== */
+
+.engraved-text {
+  position: absolute;
+
+  left: 50%;
+  top: 112px;
+
+  width: 85%;
+
+  transform: translateX(-50%);
+
+  text-align: center;
+
+  opacity: 0;
+
+  transition:
+    opacity 1.2s ease 1.15s,
+    transform 1.2s ease 1.15s;
+
+  z-index: 4;
+}
+
+
+/* το εφέ "χαραγμένο" */
+
+.names {
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 34px;
+  font-weight: 500;
+
+  line-height: 0.95;
+
+  color: #8e745d;
+
+  text-shadow:
+    1px 1px 0 rgba(255,255,255,0.7),
+    -1px -1px 0 rgba(100,70,45,0.18);
+}
+
+.names span {
+  display: block;
+
+  font-size: 22px;
+
+  margin: 2px 0;
+}
+
+
+.date {
+  margin-top: 10px;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 19px;
+
+  letter-spacing: 4px;
+
+  color: #98806c;
+
+  text-shadow:
+    1px 1px 0 rgba(255,255,255,0.65),
+    -1px -1px 0 rgba(90,65,45,0.15);
+}
+
+
+/* ========================
+   PHOTO BUTTON
+======================== */
+
+.photo-button {
+  display: inline-block;
+
+  margin-top: 17px;
+
+  padding: 9px 18px;
+
+  border: 1px solid rgba(130,100,75,0.45);
+
+  border-radius: 30px;
+
+  color: #806a58;
+
+  font-size: 11px;
+
+  letter-spacing: 1px;
+
+  text-decoration: none;
+
+  background: rgba(255,255,255,0.28);
+
+  backdrop-filter: blur(4px);
+
+  transition: 0.3s ease;
+}
+
+.photo-button:hover {
+  background: rgba(255,255,255,0.65);
+
+  transform: translateY(-2px);
+}
+
+
+/* ========================
+   SHOW CONTENT
+======================== */
+
+.shell-wrapper.open .engraved-text {
+
+  opacity: 1;
+
+  transform:
+    translateX(-50%)
+    translateY(-4px);
+}
+
+
+/* ========================
+   MOBILE
+======================== */
+
+@media (max-width: 600px) {
+
+  .shell-wrapper {
+    width: 350px;
+    height: 390px;
+  }
+
+  .shell-top,
+  .shell-bottom {
+    width: 330px;
+    left: 10px;
+  }
+
+  .shell-top {
+    height: 220px;
+    top: 75px;
+  }
+
+  .shell-bottom {
+    height: 220px;
+    bottom: 40px;
+  }
+
+  .names {
+    font-size: 29px;
+  }
+
+  .engraved-text {
+    top: 101px;
+  }
+
+  .pearl {
+    width: 52px;
+    height: 52px;
+    top: 43px;
+  }
+
+  .photo-button {
+    font-size: 10px;
+  }
+
+}
