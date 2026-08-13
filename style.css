@@ -16,211 +16,231 @@ body {
   background:
     radial-gradient(
       circle at center,
-      #fffdf7 0%,
-      #f8f2e8 45%,
-      #eee3d4 100%
+      #fffdf8 0%,
+      #f7efe5 45%,
+      #eadbc9 100%
     );
 
   overflow: hidden;
 }
 
 
-/* ========================
+/* =========================
    PAGE
-======================== */
+========================= */
 
 .page {
-  position: relative;
-
   min-height: 100vh;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  perspective: 1300px;
+  position: relative;
+
+  perspective: 1800px;
+
+  padding: 30px;
 }
 
 
-/* ========================
+/* =========================
    INTRO
-======================== */
+========================= */
 
 .intro-text {
   position: absolute;
 
-  top: 9%;
-
+  top: 35px;
   left: 50%;
+
   transform: translateX(-50%);
+
+  z-index: 20;
 
   font-family: 'Cormorant Garamond', serif;
 
-  font-size: 20px;
+  font-size: 22px;
+
   letter-spacing: 2px;
 
-  color: #8f806e;
+  color: #8d7764;
 
-  transition: 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
 
-.shell-wrapper.open + .intro-text {
-  opacity: 0;
-}
 
-
-/* ========================
+/* =========================
    SHELL WRAPPER
-======================== */
+========================= */
 
 .shell-wrapper {
   position: relative;
 
-  width: 430px;
-  height: 430px;
+  width: min(88vw, 900px);
+  height: min(82vh, 760px);
 
   cursor: pointer;
 
   transform-style: preserve-3d;
 
-  transition: transform 0.5s ease;
+  transition: transform 0.4s ease;
+
+  margin-top: 40px;
 }
 
 .shell-wrapper:hover {
-  transform: scale(1.02);
+  transform: scale(1.01);
 }
 
 
-/* ========================
-   BOTTOM SHELL
-======================== */
+/* =========================
+   LOWER SHELL
+========================= */
 
 .shell-bottom {
   position: absolute;
 
-  width: 400px;
-  height: 255px;
+  left: 50%;
+  bottom: 20px;
 
-  left: 15px;
-  bottom: 40px;
+  transform: translateX(-50%);
+
+  width: 92%;
+  height: 47%;
 
   border-radius:
-    48% 48%
-    55% 55%
-    / 35% 35%
-    65% 65%;
+    50% 50%
+    47% 47%
+    /
+    30% 30%
+    70% 70%;
 
   background:
     radial-gradient(
-      ellipse at 50% 15%,
-      #fffefa 0%,
-      #f8ead9 28%,
-      #e5cdb2 55%,
-      #b99878 100%
+      ellipse at 50% 10%,
+      #fffdf7 0%,
+      #f8e7d3 30%,
+      #eac9a7 58%,
+      #c89f79 100%
     );
 
   box-shadow:
-    inset 0 15px 25px rgba(255,255,255,0.9),
-    inset 0 -15px 30px rgba(120,80,50,0.25),
-    0 35px 45px rgba(80,55,35,0.18);
+    inset 0 18px 35px rgba(255,255,255,0.95),
+    inset 0 -20px 40px rgba(122,83,50,0.22),
+    0 35px 60px rgba(83,58,37,0.22);
 
   overflow: hidden;
+
+  z-index: 2;
 }
 
 
-/* mother of pearl shine */
+/* pearly inner glow */
 
 .shell-bottom::before {
   content: "";
 
   position: absolute;
 
-  inset: 12px;
+  inset: 18px;
 
   border-radius: inherit;
 
   background:
+
     radial-gradient(
-      circle at 30% 40%,
-      rgba(255,255,255,0.9),
-      transparent 28%
+      circle at 25% 25%,
+      rgba(255,255,255,0.95),
+      transparent 30%
     ),
+
     radial-gradient(
-      circle at 70% 35%,
-      rgba(255,220,220,0.35),
-      transparent 35%
+      circle at 75% 35%,
+      rgba(255,225,235,0.45),
+      transparent 38%
     ),
+
     radial-gradient(
-      circle at 55% 75%,
-      rgba(210,230,255,0.3),
-      transparent 40%
+      circle at 50% 75%,
+      rgba(215,235,255,0.35),
+      transparent 45%
     );
 
   pointer-events: none;
 }
 
 
-/* ========================
+/* =========================
    TOP SHELL
-======================== */
+========================= */
 
 .shell-top {
   position: absolute;
 
-  width: 400px;
-  height: 260px;
+  left: 50%;
+  top: 105px;
 
-  left: 15px;
-  top: 70px;
-
-  border-radius:
-    52% 52%
-    45% 45%
-    / 68% 68%
-    34% 34%;
-
-  background:
-    radial-gradient(
-      ellipse at 50% 80%,
-      #fbf1e3 0%,
-      #ead5be 35%,
-      #c5a181 70%,
-      #9f7d61 100%
-    );
+  transform:
+    translateX(-50%)
+    rotateX(0deg);
 
   transform-origin: center bottom;
 
-  z-index: 5;
+  width: 92%;
+  height: 50%;
+
+  border-radius:
+    52% 52%
+    42% 42%
+    /
+    70% 70%
+    32% 32%;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 82%,
+      #fff9f0 0%,
+      #edd8c1 35%,
+      #cfab88 68%,
+      #a88161 100%
+    );
 
   box-shadow:
-    inset 0 15px 30px rgba(255,255,255,0.65),
-    inset 0 -20px 30px rgba(95,60,35,0.25),
-    0 15px 35px rgba(70,40,20,0.22);
+    inset 0 20px 40px rgba(255,255,255,0.65),
+    inset 0 -25px 40px rgba(95,60,35,0.25),
+    0 20px 45px rgba(70,40,20,0.22);
 
   transition:
-    transform 1.8s cubic-bezier(.2,.85,.2,1),
+    transform 1.7s cubic-bezier(.18,.85,.25,1),
     filter 1s ease;
+
+  z-index: 6;
+
+  overflow: hidden;
 }
 
 
-/* μικρό περίγραμμα */
+/* shell outline */
 
 .shell-top::after {
   content: "";
 
   position: absolute;
 
-  inset: 7px;
+  inset: 10px;
 
   border-radius: inherit;
 
-  border: 1px solid rgba(255,255,255,0.5);
+  border: 2px solid rgba(255,255,255,0.42);
 }
 
 
-/* ========================
+/* =========================
    SHELL LINES
-======================== */
+========================= */
 
 .shell-lines {
   position: absolute;
@@ -232,31 +252,33 @@ body {
   border-radius: inherit;
 }
 
+
 .shell-lines span {
   position: absolute;
 
-  bottom: -20px;
   left: 50%;
+  bottom: -40px;
 
   width: 2px;
-  height: 260px;
+  height: 120%;
+
+  transform-origin: bottom center;
 
   background:
     linear-gradient(
       to top,
-      rgba(110,75,48,0.35),
-      rgba(255,255,255,0.05)
+      rgba(105,75,48,0.32),
+      rgba(255,255,255,0.02)
     );
-
-  transform-origin: bottom center;
 }
 
+
 .shell-lines span:nth-child(1) {
-  transform: translateX(-50%) rotate(-34deg);
+  transform: translateX(-50%) rotate(-38deg);
 }
 
 .shell-lines span:nth-child(2) {
-  transform: translateX(-50%) rotate(-17deg);
+  transform: translateX(-50%) rotate(-19deg);
 }
 
 .shell-lines span:nth-child(3) {
@@ -264,42 +286,43 @@ body {
 }
 
 .shell-lines span:nth-child(4) {
-  transform: translateX(-50%) rotate(17deg);
+  transform: translateX(-50%) rotate(19deg);
 }
 
 .shell-lines span:nth-child(5) {
-  transform: translateX(-50%) rotate(34deg);
+  transform: translateX(-50%) rotate(38deg);
 }
 
 
-/* ========================
+/* =========================
    OPEN ANIMATION
-======================== */
+========================= */
 
 .shell-wrapper.open .shell-top {
 
   transform:
-    translateY(-25px)
-    rotateX(-115deg);
+    translateX(-50%)
+    translateY(-160px)
+    rotateX(-122deg);
 
-  filter: brightness(1.08);
+  filter: brightness(1.12);
 }
 
 
-/* ========================
+/* =========================
    PEARL
-======================== */
+========================= */
 
 .pearl {
   position: absolute;
 
-  width: 62px;
-  height: 62px;
+  left: 50%;
+  top: 38px;
+
+  width: 72px;
+  height: 72px;
 
   border-radius: 50%;
-
-  left: 50%;
-  top: 52px;
 
   transform:
     translateX(-50%)
@@ -307,20 +330,23 @@ body {
 
   background:
     radial-gradient(
-      circle at 35% 30%,
+      circle at 35% 28%,
       #ffffff 0%,
       #fffdf4 25%,
-      #eadfd5 65%,
-      #cab9ae 100%
+      #e9ddd2 65%,
+      #bdaaa0 100%
     );
 
   box-shadow:
-    0 0 25px rgba(255,255,255,0.9),
-    0 0 55px rgba(255,220,170,0.45);
+    0 0 25px rgba(255,255,255,0.95),
+    0 0 60px rgba(255,220,170,0.55);
 
   transition:
-    transform 1s ease 0.8s;
+    transform 0.9s ease 0.75s;
+
+  z-index: 5;
 }
+
 
 .shell-wrapper.open .pearl {
   transform:
@@ -329,115 +355,34 @@ body {
 }
 
 
-/* ========================
-   ENGRAVED TEXT
-======================== */
+/* =========================
+   ENGRAVED CONTENT
+========================= */
 
 .engraved-text {
+
   position: absolute;
 
   left: 50%;
-  top: 112px;
+  top: 105px;
 
-  width: 85%;
+  transform:
+    translateX(-50%)
+    translateY(30px);
 
-  transform: translateX(-50%);
+  width: 78%;
 
   text-align: center;
 
   opacity: 0;
 
+  z-index: 5;
+
   transition:
-    opacity 1.2s ease 1.15s,
-    transform 1.2s ease 1.15s;
-
-  z-index: 4;
+    opacity 1s ease 0.95s,
+    transform 1s ease 0.95s;
 }
 
-
-/* το εφέ "χαραγμένο" */
-
-.names {
-  font-family: 'Cormorant Garamond', serif;
-
-  font-size: 34px;
-  font-weight: 500;
-
-  line-height: 0.95;
-
-  color: #8e745d;
-
-  text-shadow:
-    1px 1px 0 rgba(255,255,255,0.7),
-    -1px -1px 0 rgba(100,70,45,0.18);
-}
-
-.names span {
-  display: block;
-
-  font-size: 22px;
-
-  margin: 2px 0;
-}
-
-
-.date {
-  margin-top: 10px;
-
-  font-family: 'Cormorant Garamond', serif;
-
-  font-size: 19px;
-
-  letter-spacing: 4px;
-
-  color: #98806c;
-
-  text-shadow:
-    1px 1px 0 rgba(255,255,255,0.65),
-    -1px -1px 0 rgba(90,65,45,0.15);
-}
-
-
-/* ========================
-   PHOTO BUTTON
-======================== */
-
-.photo-button {
-  display: inline-block;
-
-  margin-top: 17px;
-
-  padding: 9px 18px;
-
-  border: 1px solid rgba(130,100,75,0.45);
-
-  border-radius: 30px;
-
-  color: #806a58;
-
-  font-size: 11px;
-
-  letter-spacing: 1px;
-
-  text-decoration: none;
-
-  background: rgba(255,255,255,0.28);
-
-  backdrop-filter: blur(4px);
-
-  transition: 0.3s ease;
-}
-
-.photo-button:hover {
-  background: rgba(255,255,255,0.65);
-
-  transform: translateY(-2px);
-}
-
-
-/* ========================
-   SHOW CONTENT
-======================== */
 
 .shell-wrapper.open .engraved-text {
 
@@ -445,53 +390,232 @@ body {
 
   transform:
     translateX(-50%)
-    translateY(-4px);
+    translateY(0);
 }
 
 
-/* ========================
-   MOBILE
-======================== */
+/* =========================
+   NAMES
+========================= */
 
-@media (max-width: 600px) {
+.names {
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: clamp(42px, 6vw, 72px);
+
+  font-weight: 500;
+
+  line-height: 0.85;
+
+  color: #876b52;
+
+  text-shadow:
+    1px 1px 0 rgba(255,255,255,0.82),
+    -1px -1px 0 rgba(90,60,40,0.16);
+}
+
+
+.names span {
+
+  display: block;
+
+  margin: 8px 0;
+
+  font-size: 0.55em;
+
+  font-style: italic;
+
+  color: #98775b;
+}
+
+
+/* =========================
+   DATE
+========================= */
+
+.date {
+
+  margin-top: 20px;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: clamp(20px, 2.6vw, 30px);
+
+  letter-spacing: 6px;
+
+  color: #8f725b;
+
+  text-shadow:
+    1px 1px 0 rgba(255,255,255,0.8),
+    -1px -1px 0 rgba(90,60,40,0.14);
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.photo-button {
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 28px;
+
+  min-width: 280px;
+
+  padding: 15px 28px;
+
+  border-radius: 40px;
+
+  border: 1px solid rgba(140,104,75,0.42);
+
+  background:
+    rgba(255,255,255,0.42);
+
+  color: #7e6654;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  letter-spacing: 0.8px;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.8),
+    0 8px 20px rgba(80,50,30,0.08);
+
+  backdrop-filter: blur(8px);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+
+.photo-button:hover {
+
+  transform: translateY(-3px);
+
+  background:
+    rgba(255,255,255,0.72);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+  body {
+    overflow: hidden;
+  }
+
+
+  .page {
+    padding: 10px;
+  }
+
+
+  .intro-text {
+
+    top: 20px;
+
+    font-size: 17px;
+
+    white-space: nowrap;
+  }
+
 
   .shell-wrapper {
-    width: 350px;
-    height: 390px;
+
+    width: 96vw;
+
+    height: 72vh;
+
+    min-height: 520px;
+
+    margin-top: 45px;
   }
 
-  .shell-top,
-  .shell-bottom {
-    width: 330px;
-    left: 10px;
-  }
 
   .shell-top {
-    height: 220px;
-    top: 75px;
+
+    top: 100px;
+
+    width: 96%;
+
+    height: 48%;
   }
+
 
   .shell-bottom {
-    height: 220px;
-    bottom: 40px;
+
+    width: 96%;
+
+    height: 50%;
+
+    bottom: 5px;
   }
 
-  .names {
-    font-size: 29px;
+
+  .shell-wrapper.open .shell-top {
+
+    transform:
+      translateX(-50%)
+      translateY(-105px)
+      rotateX(-118deg);
   }
+
 
   .engraved-text {
-    top: 101px;
+
+    width: 88%;
+
+    top: 83px;
   }
 
-  .pearl {
-    width: 52px;
-    height: 52px;
-    top: 43px;
+
+  .names {
+
+    font-size: clamp(35px, 11vw, 53px);
   }
+
+
+  .date {
+
+    margin-top: 14px;
+
+    font-size: 18px;
+
+    letter-spacing: 4px;
+  }
+
 
   .photo-button {
-    font-size: 10px;
+
+    min-width: 0;
+
+    width: 88%;
+
+    margin-top: 20px;
+
+    padding: 12px 15px;
+
+    font-size: 11px;
+  }
+
+
+  .pearl {
+
+    width: 57px;
+    height: 57px;
+
+    top: 28px;
   }
 
 }
