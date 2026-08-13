@@ -19,15 +19,15 @@ body {
     radial-gradient(
       circle at 50% 45%,
       #fffdf8 0%,
-      #f8f0e6 50%,
+      #f8f0e6 52%,
       #eadac7 100%
     );
 }
 
 
-/* ==================================================
+/* ==========================================
    PAGE
-================================================== */
+========================================== */
 
 .page {
   position: relative;
@@ -36,16 +36,16 @@ body {
   height: 100vh;
 
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
   overflow: hidden;
 }
 
 
-/* ==================================================
-   INSTRUCTION
-================================================== */
+/* ==========================================
+   ΑΓΓΙΞΤΕ ΤΟ ΚΟΧΥΛΙ
+========================================== */
 
 .instruction {
   position: absolute;
@@ -65,6 +65,8 @@ body {
 
   color: #94745d;
 
+  white-space: nowrap;
+
   transition:
     opacity .5s ease,
     transform .5s ease;
@@ -75,19 +77,23 @@ body.opened .instruction {
 
   transform:
     translateX(-50%)
-    translateY(-12px);
+    translateY(-15px);
 }
 
 
-/* ==================================================
-   SHELL SCENE
-================================================== */
+/* ==========================================
+   ΟΛΗ Η ΣΚΗΝΗ ΤΟΥ ΚΟΧΥΛΙΟΥ
+========================================== */
 
 .shell {
   position: relative;
 
-  width: min(96vw, 1250px);
-  height: min(93vh, 900px);
+  width: min(96vw, 1150px);
+  height: min(92vh, 900px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   cursor: pointer;
 
@@ -95,37 +101,40 @@ body.opened .instruction {
 }
 
 
-/* ==================================================
-   CLOSED SHELL
-================================================== */
+/* ==========================================
+   ΚΛΕΙΣΤΟ ΚΟΧΥΛΙ
+========================================== */
 
 .shell-closed {
   position: absolute;
 
   left: 50%;
-  top: 54%;
+  top: 52%;
 
-  width: min(92vw, 1100px);
+  width: min(88vw, 1050px);
+  max-height: 74vh;
+
+  object-fit: contain;
 
   transform:
     translate(-50%, -50%)
     scale(1);
 
-  object-fit: contain;
-
   z-index: 20;
 
   filter:
     drop-shadow(
-      0 28px 30px
-      rgba(100, 65, 40, .18)
+      0 28px 32px
+      rgba(93, 62, 38, .18)
     );
 
   transition:
     opacity .5s ease,
-    transform .8s cubic-bezier(.2,.8,.2,1);
+    transform .85s cubic-bezier(.2,.8,.2,1);
 }
 
+
+/* μικρό hover */
 
 .shell:not(.open) .shell-closed:hover {
   transform:
@@ -134,130 +143,111 @@ body.opened .instruction {
 }
 
 
+/* όταν πατηθεί */
+
 .shell.open .shell-closed {
   opacity: 0;
 
   transform:
     translate(-50%, -50%)
-    scale(.92);
+    scaleX(1.02)
+    scaleY(.72);
 
   pointer-events: none;
 }
 
 
-/* ==================================================
-   OPEN SHELL CONTAINER
-================================================== */
+/* ==========================================
+   ΑΝΟΙΧΤΟ ΚΟΧΥΛΙ
+========================================== */
 
 .open-shell {
   position: absolute;
 
-  inset: 0;
+  left: 50%;
+  top: 51%;
+
+  width: min(92vw, 1100px);
+
+  transform:
+    translate(-50%, -50%);
 
   opacity: 0;
 
   pointer-events: none;
 
+  z-index: 10;
+
   transition:
-    opacity .25s ease .25s;
+    opacity .25s ease .35s;
 }
 
 
-.shell.open .open-shell {
-  opacity: 1;
-  pointer-events: auto;
-}
+/* Εικόνα */
 
-
-/* ==================================================
-   TOP SHELL WRAPPER
-================================================== */
-
-.shell-top-wrapper {
-  position: absolute;
-
-  left: 50%;
-
-  /*
-    Αυτό είναι το σημείο που "κουμπώνει"
-    το πάνω με το κάτω μέρος.
-  */
-
-  bottom: 34%;
-
-  width: min(89vw, 1080px);
-
-  transform:
-    translateX(-50%);
-
-  transform-origin:
-    50% 100%;
-
-  z-index: 4;
-}
-
-
-/* ==================================================
-   TOP SHELL IMAGE
-================================================== */
-
-.shell-top {
+.shell-open-image {
   display: block;
 
   width: 100%;
   height: auto;
 
+  object-fit: contain;
+
   transform-origin:
-    50% 100%;
+    50% 72%;
 
   /*
-    Ξεκινάει "κλειστό"
+    ξεκινάει «κλειστή»
   */
 
   transform:
-    translateY(220px)
-    scaleY(.13);
-
-  opacity: 0;
+    scaleY(.36)
+    translateY(25%);
 
   filter:
     drop-shadow(
-      0 20px 28px
-      rgba(80, 50, 30, .14)
+      0 32px 35px
+      rgba(93, 62, 38, .17)
     );
 
   transition:
-    transform 1.45s
-      cubic-bezier(.18,.88,.25,1),
-    opacity .25s ease;
+    transform 1.25s
+    cubic-bezier(.18,.85,.22,1);
 }
 
 
-.shell.open .shell-top {
+/* Άνοιγμα */
+
+.shell.open .open-shell {
   opacity: 1;
 
-  transform:
-    translateY(0)
-    scaleY(1);
+  pointer-events: auto;
 }
 
 
-/* ==================================================
-   TEXT ON TOP SHELL
-================================================== */
+.shell.open .shell-open-image {
+  transform:
+    scaleY(1)
+    translateY(0);
+}
+
+
+/* ==========================================
+   ΚΕΙΜΕΝΟ ΣΤΟ ΠΑΝΩ ΦΥΛΛΟ
+========================================== */
 
 .shell-content {
   position: absolute;
 
+  left: 50%;
+
   /*
-    Εδώ τοποθετούμε τα γράμματα
-    πραγματικά ΜΕΣΑ στο πάνω κοχύλι.
+     ΠΑΝΩ μισό του open-shell.png
   */
 
-  left: 50%;
-  top: 29%;
+  top: 23%;
 
-  width: 57%;
+  width: 55%;
 
   transform:
     translateX(-50%)
@@ -265,9 +255,9 @@ body.opened .instruction {
 
   text-align: center;
 
-  z-index: 10;
-
   opacity: 0;
+
+  z-index: 30;
 
   pointer-events: none;
 
@@ -286,28 +276,26 @@ body.opened .instruction {
 }
 
 
-/* ==================================================
-   SMALL TOP ORNAMENT
-================================================== */
+/* ==========================================
+   ΔΙΑΚΟΣΜΗΣΗ
+========================================== */
 
 .ornament {
-  margin-bottom: 7px;
+  margin-bottom: 5px;
 
   font-family:
     'Cormorant Garamond',
     serif;
 
-  font-size: 19px;
+  font-size: 18px;
 
-  color: #ad815c;
-
-  opacity: .85;
+  color: #9c7351;
 }
 
 
-/* ==================================================
-   NAMES
-================================================== */
+/* ==========================================
+   ΟΝΟΜΑΤΑ
+========================================== */
 
 .names {
   font-family:
@@ -315,126 +303,83 @@ body.opened .instruction {
     serif;
 
   font-size:
-    clamp(43px, 5.2vw, 72px);
+    clamp(38px, 4.4vw, 64px);
 
   line-height: .82;
 
   font-weight: 500;
 
-  color: #8d684b;
-
-  /*
-    Εφέ "χαραγμένο"
-  */
+  color: #896449;
 
   text-shadow:
     1px 1px 1px
     rgba(255,255,255,.95),
 
     -1px -1px 1px
-    rgba(99,65,38,.17);
+    rgba(85,55,35,.18);
 }
 
 
 .names span {
   display: block;
 
-  margin: 9px 0 7px;
+  margin: 7px 0;
 
-  font-size: .52em;
+  font-size: .48em;
 
   font-style: italic;
 
-  color: #9f7958;
+  color: #9d7657;
 }
 
 
-/* ==================================================
-   HEART
-================================================== */
+/* ==========================================
+   ΚΑΡΔΙΑ
+========================================== */
 
 .divider {
-  margin-top: 17px;
+  margin-top: 15px;
 
-  font-size: 22px;
+  font-size: 20px;
 
-  color: #a97752;
+  color: #a87b58;
 }
 
 
-/* ==================================================
-   DATE
-================================================== */
+/* ==========================================
+   ΗΜΕΡΟΜΗΝΙΑ
+========================================== */
 
 .date {
-  margin-top: 4px;
+  margin-top: 5px;
 
   font-family:
     'Cormorant Garamond',
     serif;
 
   font-size:
-    clamp(20px, 2vw, 28px);
+    clamp(18px, 1.7vw, 25px);
 
   letter-spacing: 7px;
 
-  color: #917056;
-
-  text-shadow:
-    1px 1px 0
-    rgba(255,255,255,.8);
+  color: #916c51;
 }
 
 
-/* ==================================================
-   BOTTOM SHELL
-================================================== */
-
-.shell-bottom-wrapper {
-  position: absolute;
-
-  /*
-    Το κατεβάζουμε αρκετά ώστε
-    να μην καλύπτει το πίσω φύλλο.
-  */
-
-  left: 50%;
-  bottom: -2%;
-
-  width: min(91vw, 1100px);
-
-  transform:
-    translateX(-50%);
-
-  z-index: 6;
-}
-
-
-.shell-bottom {
-  display: block;
-
-  width: 100%;
-  height: auto;
-
-  object-fit: contain;
-
-  filter:
-    drop-shadow(
-      0 30px 35px
-      rgba(91,62,40,.16)
-    );
-}
-
-
-/* ==================================================
-   UPLOAD BUTTON
-================================================== */
+/* ==========================================
+   ΚΟΥΜΠΙ ΦΩΤΟΓΡΑΦΙΩΝ
+========================================== */
 
 .upload-button {
   position: absolute;
 
+  /*
+     ΤΩΡΑ κεντράρεται ως προς ΟΛΟ
+     το ανοιχτό κοχύλι.
+  */
+
   left: 50%;
-  top: 51%;
+  bottom: 14%;
 
   transform:
     translateX(-50%)
@@ -447,10 +392,9 @@ body.opened .instruction {
 
   gap: 9px;
 
-  min-width: 285px;
+  min-width: 290px;
 
-  padding:
-    13px 25px;
+  padding: 13px 25px;
 
   border-radius: 999px;
 
@@ -459,7 +403,7 @@ body.opened .instruction {
     rgba(151,108,71,.48);
 
   background:
-    rgba(255,250,243,.66);
+    rgba(255,250,243,.72);
 
   backdrop-filter:
     blur(8px);
@@ -470,23 +414,29 @@ body.opened .instruction {
 
   font-size: 12px;
 
-  letter-spacing: .5px;
+  letter-spacing: .4px;
+
+  white-space: nowrap;
 
   opacity: 0;
 
+  z-index: 40;
+
   box-shadow:
     inset 0 1px 0
-    rgba(255,255,255,.9),
+    rgba(255,255,255,.95),
 
     0 8px 22px
-    rgba(87,55,30,.08);
+    rgba(87,55,30,.1);
 
   transition:
-    opacity .8s ease 1.35s,
-    transform .8s ease 1.35s,
+    opacity .8s ease 1.3s,
+    transform .8s ease 1.3s,
     background .25s ease;
 }
 
+
+/* όταν ανοίξει */
 
 .shell.open .upload-button {
   opacity: 1;
@@ -499,13 +449,13 @@ body.opened .instruction {
 
 .upload-button:hover {
   background:
-    rgba(255,255,255,.9);
+    rgba(255,255,255,.95);
 }
 
 
-/* ==================================================
-   MOBILE
-================================================== */
+/* ==========================================
+   TABLET / MOBILE
+========================================== */
 
 @media (max-width: 700px) {
 
@@ -513,165 +463,149 @@ body.opened .instruction {
     top: 3vh;
 
     font-size: 17px;
-
-    white-space: nowrap;
   }
 
 
   .shell {
     width: 100vw;
-    height: 93vh;
+    height: 94vh;
   }
 
 
-  /* κλειστό */
+  /*
+    Κλειστό πιο μεγάλο στο κινητό
+  */
 
   .shell-closed {
-    width: 118vw;
-
-    top: 53%;
-  }
-
-
-  /* ΠΑΝΩ ΦΥΛΛΟ */
-
-  .shell-top-wrapper {
     width: 112vw;
 
-    bottom: 39%;
+    max-height: none;
+
+    top: 51%;
   }
 
 
-  .shell-top {
-    transform:
-      translateY(160px)
-      scaleY(.16);
+  /*
+    Ανοιχτό
+  */
+
+  .open-shell {
+    width: 116vw;
+
+    top: 52%;
   }
 
 
-  .shell.open .shell-top {
-    transform:
-      translateY(0)
-      scaleY(1);
-  }
-
-
-  /* ΚΕΙΜΕΝΟ */
+  /*
+    Κείμενο πάνω
+  */
 
   .shell-content {
-    top: 27%;
+    top: 23%;
 
-    width: 55%;
+    width: 52%;
   }
 
 
   .names {
     font-size:
       clamp(
-        35px,
-        10.5vw,
-        50px
+        31px,
+        9vw,
+        43px
       );
   }
 
 
   .names span {
-    margin:
-      5px 0;
+    margin: 3px 0;
   }
 
 
   .ornament {
-    font-size: 15px;
+    font-size: 14px;
 
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
 
 
   .divider {
-    margin-top: 10px;
+    margin-top: 7px;
 
-    font-size: 18px;
+    font-size: 16px;
   }
 
 
   .date {
-    font-size: 16px;
+    margin-top: 2px;
+
+    font-size: 14px;
 
     letter-spacing: 4px;
   }
 
 
-  /* ΚΑΤΩ ΦΥΛΛΟ */
-
-  .shell-bottom-wrapper {
-    width: 116vw;
-
-    bottom: 3%;
-  }
-
-
-  /* BUTTON */
+  /*
+    Κουμπί στο κέντρο
+    του κάτω κοχυλιού
+  */
 
   .upload-button {
-    top: 49%;
+    bottom: 13%;
 
     min-width: 0;
 
-    width: 50%;
+    width: 47%;
 
-    padding:
-      11px 10px;
+    padding: 10px 8px;
 
-    font-size: 9px;
+    font-size: 8px;
   }
 
 }
 
 
-/* ==================================================
-   VERY SMALL MOBILE
-================================================== */
+/* ==========================================
+   ΜΙΚΡΟ ΚΙΝΗΤΟ
+========================================== */
 
 @media (max-width: 430px) {
 
-  .shell-top-wrapper {
-    width: 120vw;
-
-    bottom: 40%;
+  .open-shell {
+    width: 124vw;
   }
 
 
-  .shell-bottom-wrapper {
-    width: 124vw;
-
-    bottom: 4%;
+  .shell-closed {
+    width: 120vw;
   }
 
 
   .shell-content {
-    top: 27%;
+    top: 22%;
 
-    width: 54%;
+    width: 51%;
   }
 
 
   .names {
-    font-size: 38px;
+    font-size: 34px;
   }
 
 
   .date {
-    font-size: 14px;
+    font-size: 12px;
 
     letter-spacing: 3px;
   }
 
 
   .upload-button {
-    width: 52%;
+    bottom: 13%;
 
-    font-size: 8px;
+    width: 48%;
+
+    font-size: 7px;
   }
 
 }
